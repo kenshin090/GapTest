@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.106
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GapServices", "GapServices\GapServices.csproj", "{321099E2-2C10-49DB-A0FD-1D049904B6E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GapBll", "GapBll\GapBll.csproj", "{D892B1CD-277F-4F47-9EA4-596E954510DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GapDao", "GapDao\GapDao.csproj", "{A75EE78F-105B-4CA2-9F33-3D2A3DAFE533}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GapCommon", "GapCommon\GapCommon.csproj", "{B037917E-8F3D-421B-AE46-B06A1D6B4520}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GapCompositionRoot", "GapCompositionRoot\GapCompositionRoot.csproj", "{A642E4C4-FC47-4327-BEEC-3245E246045E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GapUnitTest", "GapUnitTest\GapUnitTest.csproj", "{FD491843-D886-4923-9505-C676C59B5B17}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{321099E2-2C10-49DB-A0FD-1D049904B6E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{321099E2-2C10-49DB-A0FD-1D049904B6E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{321099E2-2C10-49DB-A0FD-1D049904B6E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{321099E2-2C10-49DB-A0FD-1D049904B6E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D892B1CD-277F-4F47-9EA4-596E954510DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D892B1CD-277F-4F47-9EA4-596E954510DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D892B1CD-277F-4F47-9EA4-596E954510DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D892B1CD-277F-4F47-9EA4-596E954510DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A75EE78F-105B-4CA2-9F33-3D2A3DAFE533}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A75EE78F-105B-4CA2-9F33-3D2A3DAFE533}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A75EE78F-105B-4CA2-9F33-3D2A3DAFE533}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A75EE78F-105B-4CA2-9F33-3D2A3DAFE533}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B037917E-8F3D-421B-AE46-B06A1D6B4520}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B037917E-8F3D-421B-AE46-B06A1D6B4520}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B037917E-8F3D-421B-AE46-B06A1D6B4520}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B037917E-8F3D-421B-AE46-B06A1D6B4520}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A642E4C4-FC47-4327-BEEC-3245E246045E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A642E4C4-FC47-4327-BEEC-3245E246045E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A642E4C4-FC47-4327-BEEC-3245E246045E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A642E4C4-FC47-4327-BEEC-3245E246045E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD491843-D886-4923-9505-C676C59B5B17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD491843-D886-4923-9505-C676C59B5B17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD491843-D886-4923-9505-C676C59B5B17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD491843-D886-4923-9505-C676C59B5B17}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {518751FA-A457-4DF7-9604-3C0F8CAD7E91}
+	EndGlobalSection
+EndGlobal
