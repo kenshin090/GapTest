@@ -5,28 +5,26 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GapDao.Access
 {
     /// <summary>
-    /// The access to the policy table
+    /// The access to the risk type table
     /// </summary>
-    public class PolicyDao : IPolicyDao
+    public class RiskTypeDao : IRiskTypeDao
     {
         /// <summary>
-        /// Method to create a new policy
+        /// Method to create a new risk type
         /// </summary>
-        /// <param name="entity">the new policy</param>
-        /// <returns>persisted policy</returns>
-        public Policy Create(Policy entity)
+        /// <param name="entity">the new risk type</param>
+        /// <returns>persisted risk type</returns>
+        public RiskType Create(RiskType entity)
         {
             try
             {
                 using (GapContext context = new GapContext())
                 {
-                    context.Policy.Add(entity);
+                    context.RiskType.Add(entity);
                     context.SaveChanges();
                     return entity;
                 }
@@ -38,9 +36,9 @@ namespace GapDao.Access
         }
 
         /// <summary>
-        /// Method to delete a policy
+        /// Method to delete a risk type
         /// </summary>
-        /// <param name="id">policy id</param>
+        /// <param name="id">risk type id</param>
         /// <returns>rows afected</returns>
         public int Delete(int id)
         {
@@ -48,8 +46,8 @@ namespace GapDao.Access
             {
                 using (GapContext context = new GapContext())
                 {
-                    Policy persisted = context.Policy.FirstOrDefault(p => p.Id == id);
-                    context.Policy.Remove(persisted);
+                    RiskType persisted = context.RiskType.FirstOrDefault(p => p.Id == id);
+                    context.RiskType.Remove(persisted);
                     return context.SaveChanges();
                 }
             }
@@ -60,43 +58,42 @@ namespace GapDao.Access
         }
 
         /// <summary>
-        /// Method for return a specific policy
+        /// Method for return a specific risk type
         /// </summary>
-        /// <param name="Id">the id of the policy</param>
-        /// <returns>Persisted policy</returns>
-        public Policy Get(int id)
+        /// <param name="Id">the id of the risk type</param>
+        /// <returns>Persisted risk type</returns>
+        public RiskType Get(int id)
         {
-            Policy policy = null;
+            RiskType riskType = null;
             try
             {
                 using (GapContext context = new GapContext())
                 {
-                    policy = context.Policy.Include("Coverages").Include("RiskType").FirstOrDefault(p => p.Id == id);
+                    riskType = context.RiskType.FirstOrDefault(p => p.Id == id);
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return policy;
+            return riskType;
         }
 
         /// <summary>
-        /// Method for search a policies list
+        /// Method for search a risk type list
         /// </summary>
         /// <param name="expression">the expression for search(lambda expression)</param>
         /// <param name="page">page needed</param>
         /// <param name="size">size of every page</param>
-        /// <returns>a list of policies that match with the expression</returns>
-        public List<Policy> Search(Expression<Func<Policy, bool>> expression, int page = 1, int size = 10)
+        /// <returns>a list of risk type that match with the expression</returns>
+        public List<RiskType> Search(Expression<Func<RiskType, bool>> expression, int page = 1, int size = 10)
         {
-            List<Policy> policies = null;
+            List<RiskType> RiskTypes = null;
             try
             {
                 using (GapContext context = new GapContext())
                 {
-                    policies = context.Policy
-                        .Include("Coverages").Include("RiskType")
+                    RiskTypes = context.RiskType
                         .Where(expression)
                         .OrderBy(sl => sl.Id)
                         .Take(size)
@@ -108,29 +105,24 @@ namespace GapDao.Access
             {
                 throw ex;
             }
-            return policies;
+            return RiskTypes;
         }
 
         /// <summary>
-        /// Method for update a policy
+        /// Method for update a risk type
         /// </summary>
-        /// <param name="id">the id of the policy</param>
-        /// <param name="entity">the entity policy</param>
-        /// <returns>the policy persisted</returns>
-        public Policy Update(int idEntity, Policy Entity)
+        /// <param name="id">the id of the risk type</param>
+        /// <param name="entity">the entity risk type</param>
+        /// <returns>the risk type persisted</returns>
+        public RiskType Update(int idEntity, RiskType Entity)
         {
-            Policy persisted = null;
+            RiskType persisted = null;
             try
             {
                 using (GapContext context = new GapContext())
                 {
-                    persisted = context.Policy.FirstOrDefault(p => p.Id == idEntity);
+                    persisted = context.RiskType.FirstOrDefault(p => p.Id == idEntity);
                     persisted.Name = Entity.Name;
-                    persisted.Price = Entity.Price;
-                    persisted.RiskTypeId = Entity.RiskTypeId;
-                    persisted.CoveragePeriod = Entity.CoveragePeriod;
-                    persisted.Coverages = Entity.Coverages;
-                    persisted.Description = Entity.Description;
 
                     context.SaveChanges();
                 }

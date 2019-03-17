@@ -11,22 +11,22 @@ using System.Threading.Tasks;
 namespace GapDao.Access
 {
     /// <summary>
-    /// The access to the policy table
+    /// The access to the policy client table
     /// </summary>
-    public class PolicyDao : IPolicyDao
+    public class PolicyClientDao : IPolicyClientDao
     {
         /// <summary>
-        /// Method to create a new policy
+        /// Method to create a new policy client
         /// </summary>
-        /// <param name="entity">the new policy</param>
-        /// <returns>persisted policy</returns>
-        public Policy Create(Policy entity)
+        /// <param name="entity">the new policy client</param>
+        /// <returns>persisted policy client</returns>
+        public PolicyClient Create(PolicyClient entity)
         {
             try
             {
                 using (GapContext context = new GapContext())
                 {
-                    context.Policy.Add(entity);
+                    context.PolicyClient.Add(entity);
                     context.SaveChanges();
                     return entity;
                 }
@@ -38,9 +38,9 @@ namespace GapDao.Access
         }
 
         /// <summary>
-        /// Method to delete a policy
+        /// Method to delete a policy client
         /// </summary>
-        /// <param name="id">policy id</param>
+        /// <param name="id">policy client id</param>
         /// <returns>rows afected</returns>
         public int Delete(int id)
         {
@@ -48,8 +48,8 @@ namespace GapDao.Access
             {
                 using (GapContext context = new GapContext())
                 {
-                    Policy persisted = context.Policy.FirstOrDefault(p => p.Id == id);
-                    context.Policy.Remove(persisted);
+                    PolicyClient persisted = context.PolicyClient.FirstOrDefault(p => p.Id == id);
+                    context.PolicyClient.Remove(persisted);
                     return context.SaveChanges();
                 }
             }
@@ -60,43 +60,43 @@ namespace GapDao.Access
         }
 
         /// <summary>
-        /// Method for return a specific policy
+        /// Method for return a specific policy client
         /// </summary>
-        /// <param name="Id">the id of the policy</param>
-        /// <returns>Persisted policy</returns>
-        public Policy Get(int id)
+        /// <param name="Id">the id of the policy client</param>
+        /// <returns>Persisted policy client</returns>
+        public PolicyClient Get(int id)
         {
-            Policy policy = null;
+            PolicyClient policyClient = null;
             try
             {
                 using (GapContext context = new GapContext())
                 {
-                    policy = context.Policy.Include("Coverages").Include("RiskType").FirstOrDefault(p => p.Id == id);
+                    policyClient = context.PolicyClient.Include("Client").Include("Policy").FirstOrDefault(p => p.Id == id);
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return policy;
+            return policyClient;
         }
 
         /// <summary>
-        /// Method for search a policies list
+        /// Method for search a Policy Client list
         /// </summary>
         /// <param name="expression">the expression for search(lambda expression)</param>
         /// <param name="page">page needed</param>
         /// <param name="size">size of every page</param>
-        /// <returns>a list of policies that match with the expression</returns>
-        public List<Policy> Search(Expression<Func<Policy, bool>> expression, int page = 1, int size = 10)
+        /// <returns>a list of Policy Client  that match with the expression</returns>
+        public List<PolicyClient> Search(Expression<Func<PolicyClient, bool>> expression, int page = 1, int size = 10)
         {
-            List<Policy> policies = null;
+            List<PolicyClient> policyClientList = null;
             try
             {
                 using (GapContext context = new GapContext())
                 {
-                    policies = context.Policy
-                        .Include("Coverages").Include("RiskType")
+                    policyClientList = context.PolicyClient
+                        .Include("Client").Include("Policy")
                         .Where(expression)
                         .OrderBy(sl => sl.Id)
                         .Take(size)
@@ -108,29 +108,25 @@ namespace GapDao.Access
             {
                 throw ex;
             }
-            return policies;
+            return policyClientList;
         }
 
         /// <summary>
-        /// Method for update a policy
+        /// Method for update a policy client
         /// </summary>
-        /// <param name="id">the id of the policy</param>
-        /// <param name="entity">the entity policy</param>
-        /// <returns>the policy persisted</returns>
-        public Policy Update(int idEntity, Policy Entity)
+        /// <param name="idEntity">the id of the policy client</param>
+        /// <param name="entity">the entity policy client</param>
+        /// <returns>the policy client persisted</returns>
+        public PolicyClient Update(int idEntity, PolicyClient Entity)
         {
-            Policy persisted = null;
+            PolicyClient persisted = null;
             try
             {
                 using (GapContext context = new GapContext())
                 {
-                    persisted = context.Policy.FirstOrDefault(p => p.Id == idEntity);
-                    persisted.Name = Entity.Name;
-                    persisted.Price = Entity.Price;
-                    persisted.RiskTypeId = Entity.RiskTypeId;
-                    persisted.CoveragePeriod = Entity.CoveragePeriod;
-                    persisted.Coverages = Entity.Coverages;
-                    persisted.Description = Entity.Description;
+                    persisted = context.PolicyClient.FirstOrDefault(p => p.Id == idEntity);
+                    persisted.ClientId = Entity.ClientId;
+                    persisted.PolicyId = Entity.PolicyId;
 
                     context.SaveChanges();
                 }

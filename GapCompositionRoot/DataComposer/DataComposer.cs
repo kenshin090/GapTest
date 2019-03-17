@@ -1,10 +1,5 @@
 ﻿using GapCommon.Interfaces.Dao;
 using GapDao.Access;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Unity;
 
 namespace GapCompositionRoot.DataComposer
@@ -21,6 +16,11 @@ namespace GapCompositionRoot.DataComposer
         public static void Compose(UnityContainer container)
         {
             container.RegisterType<IPolicyDao, PolicyDao>();
+            container.RegisterType<IClientDao, ClientDao>();
+            container.RegisterType<IPolicyClientDao, PolicyClientDao>();
+            container.RegisterType<IPoliciesCoveragesDao, PoliciesCoveragesDao>();
+            container.RegisterType<IRiskTypeDao, RiskTypeDao>();
+            container.RegisterType<ICoverageTypeDao, CoverageTypeDao>();
         }
     }
 }

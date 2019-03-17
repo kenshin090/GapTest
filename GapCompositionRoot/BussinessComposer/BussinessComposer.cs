@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using GapBll.Bll;
+using GapBll.Bll.PoliciesCoverages;
+using GapCommon.Interfaces.Bll;
 using GapCommon.Mappers;
 using System;
 using System.Collections.Generic;
@@ -27,6 +30,12 @@ namespace GapCompositionRoot.BussinessComposer
             });
 
             container.RegisterInstance<IMapper>(config.CreateMapper());
+            container.RegisterType<IPolicies, Policies>();
+            container.RegisterType<IClients, Clients>();
+            container.RegisterType<ICoverageTypes, CoverageTypes>();
+            container.RegisterType<IPoliciesCoverages, PoliciesCoverages>();
+            container.RegisterType<IPolicyClients, PolicyClients>();
+            container.RegisterType<IRiskTypes, RiskTypes>();
         }
     }
 }

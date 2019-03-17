@@ -6,9 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GapCommon.Interfaces.Dao
+namespace GapCommon.Interfaces.Bll
 {
-    public interface IPolicyDao : IRepository<Policy>
+    /// <summary>
+    /// The risk types bll behavior
+    /// </summary>
+    public interface IRiskTypes : IRepository<RiskType>
     {
     }
 }

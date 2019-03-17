@@ -11,22 +11,22 @@ using System.Threading.Tasks;
 namespace GapDao.Access
 {
     /// <summary>
-    /// The access to the policy table
+    /// The access to the client table
     /// </summary>
-    public class PolicyDao : IPolicyDao
+    public class ClientDao : IClientDao
     {
         /// <summary>
-        /// Method to create a new policy
+        /// Method to create a new client
         /// </summary>
-        /// <param name="entity">the new policy</param>
-        /// <returns>persisted policy</returns>
-        public Policy Create(Policy entity)
+        /// <param name="entity">the new client</param>
+        /// <returns>persisted client</returns>
+        public Client Create(Client entity)
         {
             try
             {
                 using (GapContext context = new GapContext())
                 {
-                    context.Policy.Add(entity);
+                    context.Client.Add(entity);
                     context.SaveChanges();
                     return entity;
                 }
@@ -38,9 +38,9 @@ namespace GapDao.Access
         }
 
         /// <summary>
-        /// Method to delete a policy
+        /// Method to delete a client
         /// </summary>
-        /// <param name="id">policy id</param>
+        /// <param name="id">client id</param>
         /// <returns>rows afected</returns>
         public int Delete(int id)
         {
@@ -48,8 +48,8 @@ namespace GapDao.Access
             {
                 using (GapContext context = new GapContext())
                 {
-                    Policy persisted = context.Policy.FirstOrDefault(p => p.Id == id);
-                    context.Policy.Remove(persisted);
+                    Client persisted = context.Client.FirstOrDefault(p => p.Id == id);
+                    context.Client.Remove(persisted);
                     return context.SaveChanges();
                 }
             }
@@ -60,43 +60,43 @@ namespace GapDao.Access
         }
 
         /// <summary>
-        /// Method for return a specific policy
+        /// Method for return a specific client
         /// </summary>
-        /// <param name="Id">the id of the policy</param>
-        /// <returns>Persisted policy</returns>
-        public Policy Get(int id)
+        /// <param name="Id">the id of the client</param>
+        /// <returns>Persisted client</returns>
+        public Client Get(int id)
         {
-            Policy policy = null;
+            Client client = null;
             try
             {
                 using (GapContext context = new GapContext())
                 {
-                    policy = context.Policy.Include("Coverages").Include("RiskType").FirstOrDefault(p => p.Id == id);
+                    client = context.Client.Include("Policies").FirstOrDefault(p => p.Id == id);
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return policy;
+            return client;
         }
 
         /// <summary>
-        /// Method for search a policies list
+        /// Method for search a clients list
         /// </summary>
         /// <param name="expression">the expression for search(lambda expression)</param>
         /// <param name="page">page needed</param>
         /// <param name="size">size of every page</param>
-        /// <returns>a list of policies that match with the expression</returns>
-        public List<Policy> Search(Expression<Func<Policy, bool>> expression, int page = 1, int size = 10)
+        /// <returns>a list of clients that match with the expression</returns>
+        public List<Client> Search(Expression<Func<Client, bool>> expression, int page = 1, int size = 10)
         {
-            List<Policy> policies = null;
+            List<Client> clients = null;
             try
             {
                 using (GapContext context = new GapContext())
                 {
-                    policies = context.Policy
-                        .Include("Coverages").Include("RiskType")
+                    clients = context.Client
+                        .Include("Policies")
                         .Where(expression)
                         .OrderBy(sl => sl.Id)
                         .Take(size)
@@ -108,29 +108,30 @@ namespace GapDao.Access
             {
                 throw ex;
             }
-            return policies;
+            return clients;
         }
 
         /// <summary>
-        /// Method for update a policy
+        /// Method for update a client
         /// </summary>
-        /// <param name="id">the id of the policy</param>
-        /// <param name="entity">the entity policy</param>
-        /// <returns>the policy persisted</returns>
-        public Policy Update(int idEntity, Policy Entity)
+        /// <param name="id">the id of the client</param>
+        /// <param name="entity">the entity client</param>
+        /// <returns>the client persisted</returns>
+        public Client Update(int idEntity, Client Entity)
         {
-            Policy persisted = null;
+            Client persisted = null;
             try
             {
                 using (GapContext context = new GapContext())
                 {
-                    persisted = context.Policy.FirstOrDefault(p => p.Id == idEntity);
+                    persisted = context.Client.FirstOrDefault(p => p.Id == idEntity);
+                    persisted.Address = Entity.Address;
+                    persisted.Email = Entity.Email;
+                    persisted.LastName = Entity.LastName;
                     persisted.Name = Entity.Name;
-                    persisted.Price = Entity.Price;
-                    persisted.RiskTypeId = Entity.RiskTypeId;
-                    persisted.CoveragePeriod = Entity.CoveragePeriod;
-                    persisted.Coverages = Entity.Coverages;
-                    persisted.Description = Entity.Description;
+                    persisted.NUIP = Entity.NUIP;
+                    persisted.Phone = Entity.Phone;
+                    persisted.Policies = Entity.Policies;
 
                     context.SaveChanges();
                 }

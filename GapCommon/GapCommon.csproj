@@ -54,12 +54,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\CoverageType.cs" />
+    <Compile Include="Entities\PolicyClient.cs" />
     <Compile Include="Entities\PoliciesCoverages.cs" />
     <Compile Include="Entities\Policy.cs" />
     <Compile Include="Entities\RiskType.cs" />
+    <Compile Include="Exceptions\MessageException.cs" />
+    <Compile Include="Interfaces\Bll\IClients.cs" />
+    <Compile Include="Interfaces\Bll\ICoverageTypes.cs" />
+    <Compile Include="Interfaces\Bll\IPoliciesCoverages.cs" />
+    <Compile Include="Interfaces\Bll\IPolicyClients.cs" />
+    <Compile Include="Interfaces\Bll\IRiskTypes.cs" />
     <Compile Include="Interfaces\Bll\Policies.cs" />
-    <Compile Include="Interfaces\Dao\PolicyDao.cs" />
+    <Compile Include="Interfaces\Dao\IClientDao.cs" />
+    <Compile Include="Interfaces\Dao\ICoverageTypeDao.cs" />
+    <Compile Include="Interfaces\Dao\IPoliciesCoveragesDao.cs" />
+    <Compile Include="Interfaces\Dao\IPolicyClientDao.cs" />
+    <Compile Include="Interfaces\Dao\IPolicyDao.cs" />
+    <Compile Include="Interfaces\Dao\IRiskTypeDao.cs" />
     <Compile Include="Interfaces\Generic\ICreable.cs" />
     <Compile Include="Interfaces\Generic\IDeleteable.cs" />
     <Compile Include="Interfaces\Generic\IObtainable.cs" />

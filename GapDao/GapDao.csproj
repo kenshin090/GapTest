@@ -48,7 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Access\ClientDao.cs" />
+    <Compile Include="Access\CoverageTypeDao.cs" />
+    <Compile Include="Access\PoliciesCoveragesDao.cs" />
+    <Compile Include="Access\PolicyClientDao.cs" />
     <Compile Include="Access\PolicyDao.cs" />
+    <Compile Include="Access\RiskTypeDao.cs" />
     <Compile Include="Context\GapContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

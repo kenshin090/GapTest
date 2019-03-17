@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 namespace GapCommon.Interfaces.Bll
 {
     /// <summary>
-    /// The policies bll behavior
+    /// The policy client bll behavior
     /// </summary>
-    public interface IPolicies : IRepository<Policy>
+    public interface IPolicyClients : IRepository<PolicyClient>
     {
     }
 }

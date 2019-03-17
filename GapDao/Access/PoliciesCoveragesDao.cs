@@ -5,28 +5,26 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GapDao.Access
 {
     /// <summary>
-    /// The access to the policy table
+    /// The access to the policies coverage type table
     /// </summary>
-    public class PolicyDao : IPolicyDao
+    public class PoliciesCoveragesDao : IPoliciesCoveragesDao
     {
         /// <summary>
-        /// Method to create a new policy
+        /// Method to create a new policy coverage
         /// </summary>
-        /// <param name="entity">the new policy</param>
-        /// <returns>persisted policy</returns>
-        public Policy Create(Policy entity)
+        /// <param name="entity">the new policy coverage</param>
+        /// <returns>persisted policy coverage</returns>
+        public PoliciesCoverages Create(PoliciesCoverages entity)
         {
             try
             {
                 using (GapContext context = new GapContext())
                 {
-                    context.Policy.Add(entity);
+                    context.PoliciesCoverages.Add(entity);
                     context.SaveChanges();
                     return entity;
                 }
@@ -38,9 +36,9 @@ namespace GapDao.Access
         }
 
         /// <summary>
-        /// Method to delete a policy
+        /// Method to delete a policy coverage
         /// </summary>
-        /// <param name="id">policy id</param>
+        /// <param name="id">policy coverage id</param>
         /// <returns>rows afected</returns>
         public int Delete(int id)
         {
@@ -48,8 +46,8 @@ namespace GapDao.Access
             {
                 using (GapContext context = new GapContext())
                 {
-                    Policy persisted = context.Policy.FirstOrDefault(p => p.Id == id);
-                    context.Policy.Remove(persisted);
+                    PoliciesCoverages persisted = context.PoliciesCoverages.FirstOrDefault(p => p.Id == id);
+                    context.PoliciesCoverages.Remove(persisted);
                     return context.SaveChanges();
                 }
             }
@@ -60,43 +58,44 @@ namespace GapDao.Access
         }
 
         /// <summary>
-        /// Method for return a specific policy
+        /// Method for return a specific policies coverages
         /// </summary>
-        /// <param name="Id">the id of the policy</param>
-        /// <returns>Persisted policy</returns>
-        public Policy Get(int id)
+        /// <param name="Id">the id of the policies coverages</param>
+        /// <returns>Persisted policies coverages</returns>
+        public PoliciesCoverages Get(int id)
         {
-            Policy policy = null;
+            PoliciesCoverages policiesCoverages = null;
             try
             {
                 using (GapContext context = new GapContext())
                 {
-                    policy = context.Policy.Include("Coverages").Include("RiskType").FirstOrDefault(p => p.Id == id);
+                    policiesCoverages = context.PoliciesCoverages.Include("CoverageType").FirstOrDefault(p => p.Id == id);
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return policy;
+            return policiesCoverages;
         }
 
         /// <summary>
-        /// Method for search a policies list
+        /// Method for search a policies coverages list
         /// </summary>
         /// <param name="expression">the expression for search(lambda expression)</param>
         /// <param name="page">page needed</param>
         /// <param name="size">size of every page</param>
-        /// <returns>a list of policies that match with the expression</returns>
-        public List<Policy> Search(Expression<Func<Policy, bool>> expression, int page = 1, int size = 10)
+        /// <returns>a list of policies coverages that match with the expression</returns>
+
+        public List<PoliciesCoverages> Search(Expression<Func<PoliciesCoverages, bool>> expression, int page = 1, int size = 10)
         {
-            List<Policy> policies = null;
+            List<PoliciesCoverages> policiesCoverages = null;
             try
             {
                 using (GapContext context = new GapContext())
                 {
-                    policies = context.Policy
-                        .Include("Coverages").Include("RiskType")
+                    policiesCoverages = context.PoliciesCoverages
+                        .Include("CoverageType")
                         .Where(expression)
                         .OrderBy(sl => sl.Id)
                         .Take(size)
@@ -108,29 +107,26 @@ namespace GapDao.Access
             {
                 throw ex;
             }
-            return policies;
+            return policiesCoverages;
         }
 
         /// <summary>
-        /// Method for update a policy
+        /// Method for update a policy coverage
         /// </summary>
-        /// <param name="id">the id of the policy</param>
-        /// <param name="entity">the entity policy</param>
-        /// <returns>the policy persisted</returns>
-        public Policy Update(int idEntity, Policy Entity)
+        /// <param name="id">the id of the policy coverage</param>
+        /// <param name="entity">the entity policy coverage</param>
+        /// <returns>the policy coverage persisted</returns>
+        public PoliciesCoverages Update(int idEntity, PoliciesCoverages Entity)
         {
-            Policy persisted = null;
+            PoliciesCoverages persisted = null;
             try
             {
                 using (GapContext context = new GapContext())
                 {
-                    persisted = context.Policy.FirstOrDefault(p => p.Id == idEntity);
-                    persisted.Name = Entity.Name;
-                    persisted.Price = Entity.Price;
-                    persisted.RiskTypeId = Entity.RiskTypeId;
-                    persisted.CoveragePeriod = Entity.CoveragePeriod;
-                    persisted.Coverages = Entity.Coverages;
-                    persisted.Description = Entity.Description;
+                    persisted = context.PoliciesCoverages.FirstOrDefault(p => p.Id == idEntity);
+                    persisted.CoverageTypeId = Entity.CoverageTypeId;
+                    persisted.Percentage = Entity.Percentage;
+                    persisted.PolicyId = Entity.PolicyId;
 
                     context.SaveChanges();
                 }

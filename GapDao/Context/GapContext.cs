@@ -21,6 +21,11 @@ namespace GapDao.Contexts
         }
 
         /// <summary>
+        /// The context to client table
+        /// </summary>
+        public DbSet<Client> Client { get; set; }
+
+        /// <summary>
         /// The context to coverage type table
         /// </summary>
         public DbSet<CoverageType> CoverageType { get; set; }
@@ -34,6 +39,11 @@ namespace GapDao.Contexts
         /// The context to policy table
         /// </summary>
         public DbSet<Policy> Policy { get; set; }
+
+        /// <summary>
+        /// The context to policy client
+        /// </summary>
+        public DbSet<PolicyClient> PolicyClient { get; set; }
 
         /// <summary>
         /// The context to risk type table

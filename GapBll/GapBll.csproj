@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bll\Clients.cs" />
+    <Compile Include="Bll\CoverageTypes.cs" />
+    <Compile Include="Bll\Policies.cs" />
+    <Compile Include="Bll\PoliciesCoverages.cs" />
+    <Compile Include="Bll\PolicyClients.cs" />
+    <Compile Include="Bll\RiskTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -47,5 +47,7 @@ namespace GapCommon.Entities
         public virtual RiskType RiskType { get; set; }
 
         public int RiskTypeId { get; set; }
+
+        public DateTime StartDatePolicy { get; set; }
     }
 }
