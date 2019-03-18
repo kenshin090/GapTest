@@ -60,6 +60,7 @@
     <Compile Include="Entities\PoliciesCoverages.cs" />
     <Compile Include="Entities\Policy.cs" />
     <Compile Include="Entities\RiskType.cs" />
+    <Compile Include="Enum\RiskTypeEnum.cs" />
     <Compile Include="Exceptions\MessageException.cs" />
     <Compile Include="Interfaces\Bll\IClients.cs" />
     <Compile Include="Interfaces\Bll\ICoverageTypes.cs" />

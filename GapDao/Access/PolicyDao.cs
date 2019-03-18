@@ -96,7 +96,7 @@ namespace GapDao.Access
                 using (GapContext context = new GapContext())
                 {
                     policies = context.Policy
-                        .Include("Coverages").Include("RiskType")
+                        .Include("Coverages").Include("RiskType").Include("Coverages.CoverageType")
                         .Where(expression)
                         .OrderBy(sl => sl.Id)
                         .Take(size)
