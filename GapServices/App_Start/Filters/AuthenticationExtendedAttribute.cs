@@ -67,7 +67,7 @@ namespace GapServices.App_Start.Filters
             if (persisted != null && persisted.ExpirationDate > DateTime.Now)
             {
                 context.ActionContext.ControllerContext.RouteData.Values.Add("LoadPermission", true);
-                context.ActionContext.ControllerContext.RouteData.Values.Add("UserId", persisted.Id);
+                context.ActionContext.ControllerContext.RouteData.Values.Add("UserId", persisted.UserId);
             }
             else
             {

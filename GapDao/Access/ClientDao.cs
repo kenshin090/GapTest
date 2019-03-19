@@ -71,7 +71,7 @@ namespace GapDao.Access
             {
                 using (GapContext context = new GapContext())
                 {
-                    client = context.Client.Include("Policies").FirstOrDefault(p => p.Id == id);
+                    client = context.Client.Include("Policies").Include("Policies.Policy").FirstOrDefault(p => p.Id == id);
                 }
             }
             catch (Exception ex)
@@ -97,6 +97,10 @@ namespace GapDao.Access
                 {
                     clients = context.Client
                         .Include("Policies")
+                        .Include("Policies.Policy")
+                        .Include("Policies.Policy.Coverages")
+                        .Include("Policies.Policy.Coverages.CoverageType")
+                        .Include("Policies.Policy.RiskType")
                         .Where(expression)
                         .OrderBy(sl => sl.Id)
                         .Take(size)

@@ -23,6 +23,7 @@ namespace GapDao.Access
             {
                 using (GapContext context = new GapContext())
                 {
+                    entity.CreatedDate = DateTime.Now;
                     context.User.Add(entity);
                     context.SaveChanges();
                     return entity;

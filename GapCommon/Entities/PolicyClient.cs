@@ -12,11 +12,6 @@ namespace GapCommon.Entities
     public class PolicyClient
     {
         /// <summary>
-        /// The client
-        /// </summary>
-        public virtual Client Client { get; set; }
-
-        /// <summary>
         /// The client id
         /// </summary>
         public int ClientId { get; set; }
