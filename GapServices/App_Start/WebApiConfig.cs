@@ -1,8 +1,10 @@
-﻿using GapCompositionRoot;
+﻿using GapCommon.Interfaces.Bll;
+using GapCompositionRoot;
 using GapServices.App_Start.Filters;
 using GapServices.App_Start.Helper;
 using System.Net.Http.Headers;
 using System.Web.Http;
+using Unity;
 
 namespace GapServices
 {
@@ -15,10 +17,15 @@ namespace GapServices
 
             config.DependencyResolver = new UnityResolver(container);
 
+            IUserTokens authentications = container.Resolve<IUserTokens>();
+            IUsers users = container.Resolve<IUsers>();
+
             // Web API configuration and services
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+            config.Filters.Add(new AuthenticationExtendedAttribute(authentications));
+            config.Filters.Add(new AuthorizationFilterExtended(users));
             config.Filters.Add(new FilterExtendedAttribute());
             config.Filters.Add(new ExceptionExtendedAttribute());
 

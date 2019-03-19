@@ -1,6 +1,10 @@
-﻿using System;
+﻿using GapCommon.Entities;
+using GapCommon.Exceptions;
+using GapCommon.Interfaces.Bll;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,12 +18,15 @@ namespace GapServices.App_Start.Filters
     /// </summary>
     public class AuthenticationExtendedAttribute : Attribute, IAuthenticationFilter
     {
+        private IUserTokens ModuleTokens = null;
+
         /// <summary>
         /// Builder for the injection
         /// </summary>
         /// <param name="module">the access to the authentication</param>
-        public AuthenticationExtendedAttribute()
+        public AuthenticationExtendedAttribute(IUserTokens moduleTokens)
         {
+            this.ModuleTokens = moduleTokens;
         }
 
         /// <summary>
@@ -35,19 +42,16 @@ namespace GapServices.App_Start.Filters
         /// <returns></returns>
         public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
         {
-            List<Claim> claims = new List<Claim>();
-
-            if (HttpContext.Current.Request.Headers["Ocp-Apim-Subscription-Key"] != null)
+            if (HttpContext.Current.Request.Headers["Authorization"] != null)
             {
-                if (HttpContext.Current.Request.Headers["Ocp-Apim-Subscription-Key"]
-                    == System.Configuration.ConfigurationManager.AppSettings["ApiSecuredKey"])
-                {
-                    DefineRoles(claims);
-                }
+                string Token = HttpContext.Current.Request.Headers["Authorization"];
+                ValidateToken(Token, context);
+            }
+            else
+            {
+                context.ActionContext.ControllerContext.RouteData.Values.Add("LoadPermission", false);
             }
 
-            ClaimsIdentity identity = new ClaimsIdentity(claims, "none");
-            context.Principal = new ClaimsPrincipal(new[] { identity });
             return;
         }
 
@@ -56,19 +60,18 @@ namespace GapServices.App_Start.Filters
             return;
         }
 
-        private void DefineRoles(List<Claim> claims)
+        private void ValidateToken(string token, HttpAuthenticationContext context)
         {
-            if (HttpContext.Current.Request.Headers["TokenId"] != null)
+            Expression<Func<UserToken, bool>> expression = (usrT => usrT.Token == token);
+            UserToken persisted = ModuleTokens.Search(expression).FirstOrDefault();
+            if (persisted != null && persisted.ExpirationDate > DateTime.Now)
             {
-                claims.Add(new Claim(ClaimTypes.Role, "Client"));
+                context.ActionContext.ControllerContext.RouteData.Values.Add("LoadPermission", true);
+                context.ActionContext.ControllerContext.RouteData.Values.Add("UserId", persisted.Id);
             }
             else
             {
-                claims.Add(new Claim(ClaimTypes.Role, "Invited"));
-            }
-
-            if (HttpContext.Current.Request.Headers["Secret"] != null)
-            {
+                throw new MessageException() { Code = -1, TextMessage = "InvalidToken" };
             }
         }
     }

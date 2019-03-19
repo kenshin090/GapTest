@@ -31,6 +31,7 @@ namespace GapServices.Controllers
         /// Method to delete a policy
         /// </summary>
         /// <param name="id">PolicyId</param>
+        [Authorize(Roles = "Administrator")]
         public void Delete(int id)
         {
             Module.Delete(id);
@@ -40,6 +41,7 @@ namespace GapServices.Controllers
         /// Method to get all the policies
         /// </summary>
         /// <returns></returns>
+        [Authorize(Roles = "Administrator")]
         public IEnumerable<Policy> Get()
         {
             Expression<Func<Policy, bool>> expression = (pl => pl.Id != 0);
@@ -52,6 +54,7 @@ namespace GapServices.Controllers
         /// <param name="id">policy id</param>
         /// <returns>persisted policy</returns>
         [SwaggerOperation("GetPolicyById")]
+        [Authorize(Roles = "Administrator")]
         public Policy Get(int id)
         {
             return Module.Get(id);
@@ -62,6 +65,7 @@ namespace GapServices.Controllers
         /// </summary>
         /// <param name="value">the new policy</param>
         /// <returns>persisted policy</returns>
+        [Authorize(Roles = "Administrator")]
         public Policy Post([FromBody]Policy value)
         {
             return Module.Create(value);
@@ -73,6 +77,7 @@ namespace GapServices.Controllers
         /// <param name="id">policy id</param>
         /// <param name="value">the updated policy</param>
         /// <returns>persited policy</returns>
+        [Authorize(Roles = "Administrator")]
         public Policy Put(int id, [FromBody]Policy value)
         {
             return Module.Update(id, value);

@@ -21,6 +21,8 @@ namespace GapCompositionRoot.DataComposer
             container.RegisterType<IPoliciesCoveragesDao, PoliciesCoveragesDao>();
             container.RegisterType<IRiskTypeDao, RiskTypeDao>();
             container.RegisterType<ICoverageTypeDao, CoverageTypeDao>();
+            container.RegisterType<IUserDao, UserDao>();
+            container.RegisterType<IUserTokenDao, UserTokenDao>();
         }
     }
 }

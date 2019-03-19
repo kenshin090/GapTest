@@ -31,6 +31,11 @@ namespace GapDao.Contexts
         public DbSet<CoverageType> CoverageType { get; set; }
 
         /// <summary>
+        /// The context to Permissions table
+        /// </summary>
+        public DbSet<Permissions> Permissions { get; set; }
+
+        /// <summary>
         /// The context to policies coverages table
         /// </summary>
         public DbSet<PoliciesCoverages> PoliciesCoverages { get; set; }
@@ -49,6 +54,16 @@ namespace GapDao.Contexts
         /// The context to risk type table
         /// </summary>
         public DbSet<RiskType> RiskType { get; set; }
+
+        /// <summary>
+        /// The context to user table
+        /// </summary>
+        public DbSet<User> User { get; set; }
+
+        /// <summary>
+        /// The context to UserToken table
+        /// </summary>
+        public DbSet<UserToken> UserToken { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

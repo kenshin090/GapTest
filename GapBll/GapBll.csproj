@@ -53,6 +53,8 @@
     <Compile Include="Bll\PoliciesCoverages.cs" />
     <Compile Include="Bll\PolicyClients.cs" />
     <Compile Include="Bll\RiskTypes.cs" />
+    <Compile Include="Bll\Users.cs" />
+    <Compile Include="Bll\UserTokens.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

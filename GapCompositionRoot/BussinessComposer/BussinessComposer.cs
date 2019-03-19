@@ -36,6 +36,8 @@ namespace GapCompositionRoot.BussinessComposer
             container.RegisterType<IPoliciesCoverages, PoliciesCoverages>();
             container.RegisterType<IPolicyClients, PolicyClients>();
             container.RegisterType<IRiskTypes, RiskTypes>();
+            container.RegisterType<IUsers, Users>();
+            container.RegisterType<IUserTokens, UserTokens>();
         }
     }
 }

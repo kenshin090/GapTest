@@ -31,6 +31,21 @@ namespace GapDao.Migrations
             defaultCoverageType.Add(new CoverageType() { Coverage = "Hurto" });
 
             context.CoverageType.AddRange(defaultCoverageType);
+
+            IList<Permissions> defatultPermissions = new List<Permissions>();
+            defatultPermissions.Add(new Permissions() { Name = "Administrator" });
+            defatultPermissions.Add(new Permissions() { Name = "Client" });
+
+            context.Permissions.AddRange(defatultPermissions);
+
+            IList<User> defatultUsers = new List<User>();
+
+            List<UserPermission> adminPermission = new List<UserPermission>();
+            adminPermission.Add(new UserPermission() { PermissionsId = 1 });
+
+            defatultUsers.Add(new User() { CreatedDate = DateTime.Now, Email = "Admin@gap.com", Password = "123456", Permissions = adminPermission });
+
+            context.User.AddRange(defatultUsers);
         }
     }
 }
